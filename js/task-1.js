@@ -10,6 +10,6 @@ console.log(itemEl.length);
 itemEl.forEach((el) => {
   const title = el.querySelector("h2").textContent;
   const li = el.querySelectorAll("ul li").length;
-  console.log(title);
-  console.log(li);
+  console.log(`Category: ${title}`);
+  console.log(`Elements: ${liCount}`);
 });

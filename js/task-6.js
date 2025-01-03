@@ -25,6 +25,8 @@ function getRandomHexColor() {
 }
 
 function createBoxes(amount) {
+  divEl.innerHTML = "";
+
   let size = 30;
   const elements = [];
   for (let i = 0; i < amount; i++) {

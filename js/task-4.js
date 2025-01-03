@@ -22,6 +22,7 @@ formEL.addEventListener("submit", (event) => {
   event.preventDefault();
   if (emailInput.value === "" || passwordInput.value === "") {
     alert("All form fields must be filled in");
+    return;
   } else {
     const formArr = {
       [emailInput.name]: emailInput.value.trim(),
