@@ -14,38 +14,37 @@
 // Усі елементи повинні мати випадковий колір фону. Використовуй готову функцію getRandomHexColor() для отримання
 // випадкового кольору.
 
-const inputEl = document.querySelector("div input");
-const createEl = document.querySelectorAll("button");
-const divEl = document.querySelector("#boxes");
+const input = document.querySelector('input[type="number"]');
+const createBtn = document.querySelector("button[data-create]");
+const destroyBtn = document.querySelector("button[data-destroy]");
+const boxes = document.querySelector("#boxes");
+
+createBtn.addEventListener("click", () => {
+  const amount = Number(input.value);
+  if (amount >= 1 && amount <= 100) {
+    destroyBoxes();
+    let boxesHTML = "";
+    for (let i = 0; i < amount; i++) {
+      boxesHTML += createBox(i);
+    }
+    input.value = "";
+    boxes.innerHTML = boxesHTML;
+  }
+});
+
+destroyBtn.addEventListener("click", destroyBoxes);
 
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215)
     .toString(16)
-    .padStart(6, 0)}`;
+    .padStart(6, "0")}`;
 }
 
-function createBoxes(amount) {
-  divEl.innerHTML = "";
-
-  let size = 30;
-  const elements = [];
-  for (let i = 0; i < amount; i++) {
-    const div = document.createElement("div");
-    div.style.width = `${size}px`;
-    div.style.height = `${size}px`;
-    const randomColor = getRandomHexColor();
-    div.style.backgroundColor = randomColor;
-    elements.push(div);
-    size += 10;
-  }
-  divEl.append(...elements);
+function createBox(amount) {
+  const size = 30 + amount * 10;
+  return `<div style="width: ${size}px; height: ${size}px; background-color: ${getRandomHexColor()};"></div>`;
 }
 
-createEl[0].addEventListener("click", () => {
-  if (inputEl.value < 1 || inputEl.value > 100) {
-    console.log("Enter valid number");
-    return;
-  }
-  createBoxes(inputEl.value);
-  inputEl.value = "";
-});
+function destroyBoxes() {
+  boxes.innerHTML = "";
+}
